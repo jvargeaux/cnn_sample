@@ -1,4 +1,8 @@
 
+// const url = 'http://127.0.0.1:5000'
+const url = 'http://167.172.139.55/cnn/'
+
+
 // === FILE ===
 
 const openFileSelect = () => {
@@ -69,7 +73,7 @@ const fetchResults = async (file) => {
   let formData = new FormData()
   formData.append('file', file)
 
-  const response = await fetch('http://127.0.0.1:5000/api/digit', {
+  const response = await fetch(url + '/api/digit', {
     method: 'POST',
     mode: 'cors',
     body: formData
