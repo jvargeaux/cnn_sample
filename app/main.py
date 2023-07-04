@@ -16,13 +16,11 @@ def is_allowed_filetype(filename):
 
 
 @app.route('/')
-@cross_origin
 def home():
   return render_template('home.html')
 
 
 @app.route('/api/digit', methods=['POST'])
-@cross_origin
 def getDigit():
   # Get image file
   file = request.files.get('file')
