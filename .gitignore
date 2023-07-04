@@ -2,7 +2,6 @@
 app/__pycache__
 training/__pycache__
 
-.env
-app/.env
+# .env
 
 training/data

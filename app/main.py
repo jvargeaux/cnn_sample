@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request, jsonify
+from flask_cors import CORS
 from dotenv import load_dotenv
 from predict import transform_image, get_prediction
 
 
 load_dotenv()
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/app/static')
+CORS(app)
 
 
 ALLOWED_FILETYPES = {'png'}
@@ -13,12 +15,12 @@ def is_allowed_filetype(filename):
 
 
 @app.route('/')
-def home(blarg=None):
-  return render_template('home.html', blarg='yes')
+def home():
+  return render_template('home.html')
 
 
 @app.route('/api/digit', methods=['POST'])
-def getDigit(image=None):
+def getDigit():
   # Get image file
   file = request.files.get('file')
 
