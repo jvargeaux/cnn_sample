@@ -1,3 +1,6 @@
 .DS_Store
+app/__pycache__
 
+.env
+app/.env
 training/data
