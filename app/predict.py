@@ -1,6 +1,9 @@
 import sys
-sys.path.append('../training')
-
+import os
+current_dir = os.path.dirname(os.path.realpath(__file__))
+parent_dir = os.path.abspath(os.path.join(current_dir, '../'))
+sys.path.append(parent_dir)
+  
 import io
 import torch
 from torch import nn
@@ -11,7 +14,8 @@ from training.model import DigitClassifierCNN
 
 # Load the model state into a new instance
 model = DigitClassifierCNN()
-PATH = ''
+PATH = parent_dir + '/model.pth'
+print(PATH)
 model.load_state_dict(torch.load(PATH))
 model.eval()
 
@@ -31,7 +35,12 @@ def transform_image(image_bytes):
 
 # Use our trained model on the image data we receive
 def get_prediction(image_tensor):
-  images = image_tensor.reshape(-1, 28*28)
-  outputs = model(images)
-  value, predicted = torch.max(outputs.data, 1)
-  return predicted
+  outputs = model(image_tensor)
+  
+  # Use Softmax to get percentages for all classes
+  all_outputs = torch.softmax(outputs.data, dim=1)
+  all_outputs = all_outputs.numpy()[0]
+  percentages = all_outputs.tolist()
+
+  _, predicted = torch.max(outputs.data, 1)
+  return predicted, percentages

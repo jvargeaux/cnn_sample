@@ -19,7 +19,10 @@ def home(blarg=None):
 
 @app.route('/api/digit', methods=['POST'])
 def getDigit(image=None):
+  # Get image file
   file = request.files.get('file')
+
+  # If empty or not png, return error
   if file is None or file.filename == '':
     return jsonify({
       'error': 'No file provided.'
@@ -29,14 +32,17 @@ def getDigit(image=None):
       'error': 'Filetype not supported.'
     })
   
+  # Transform image bytes to tensor, and pass to model
   try:
     img_bytes = file.read()
     tensor = transform_image(img_bytes)
-    prediction = get_prediction(tensor)
-    data = {
-      'prediction': prediction.item()
-    }
-  except:
+    prediction, percentages = get_prediction(tensor)
+    return jsonify({
+      'prediction': prediction.item(),
+      'percentages': percentages
+    })
+  except Exception as e:
+    print(e)
     return jsonify({
       'error': 'Problem reading file.'
     })

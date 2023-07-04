@@ -4,3 +4,69 @@ html {
   background-color: #131314;
   font-family: 'Avenir', sans-serif;
 }
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 2rem;
+}
+
+hr {
+  border-color: #3d414d;
+  width: 60vw;
+  max-width: 480px;;
+}
+
+button {
+  margin: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #35259b;
+  font-family: 'Avenir', sans-serif;
+  font-weight: 400;
+  outline: none;
+  border: 0;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+button:hover {
+  background-color: #4e3cc5;
+}
+
+.clear-button {
+  background-color: #575f76;
+}
+.clear-button:hover {
+  background-color: #7e87a3;
+}
+
+
+
+.hint {
+  margin: 0.75rem 0;
+  padding: 0 2rem;
+  color: #aaa;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+#results {
+  margin: 0.5rem;
+  margin-bottom: 1rem;
+  color: #43e67c;
+  font-size: 3rem;
+  font-weight: 500;
+}
+
+
+
+#fileSelect {
+  display: none;
+}
+
+canvas {
+  margin: 1rem;
+  background-color: #000;
+}

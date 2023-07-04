@@ -6,7 +6,99 @@
     <script src="{{ url_for('static', filename='app.js') }}"></script>
   </head>
   <body>
-    <p>Hey there {% if blarg %}blargman{% endif %}</p>
-    <button onClick="getDigit()">Get Digit</button>
+
+    <h2>Digit Classifier</h2>
+    <p class="hint">This model attempts to identify the correct numerical digit from an input image.</p>
+    <p class="hint">Upload a file or draw on the canvas below to test the Network.</p>
+    <br/>
+    <br/>
+    
+    <p>Upload a File</p>
+    <p class="hint">Note: only .png is supported currently.</p>
+
+    <button onClick="openFileSelect()">Select File</button>
+    <input
+      type="file"
+      id="fileSelect"
+      accept="image/png"
+      onchange="onSelectFile(event)"
+    />
+
+    <br/>
+    <hr/>
+
+    <p>Draw a Digit</p>
+    <p class="hint">Draw slowly and fill the entire box for best results.</p>
+
+    <canvas
+      id="canvas"
+      width="200"
+      height="200"
+      onmousedown="canvasMouseDown(event)"
+      onmousemove="onDrag(event)"
+      onmouseup="canvasMouseUp(event)"
+    ></canvas>
+
+    <button class="clear-button" onClick="clearCanvas()">Clear</button>
+    <button onClick="sendDrawing()">Upload Drawing</button>
+    <br/>
+
+    <hr/>
+    <p class="hint">Results</p>
+    <h1 id="results"></h1>
+    <p class="hint">Below are the network's confidence in each digit.</p>
+
+    <div class="prediction-percentages">
+      <div class="percentage">
+        <span>0:</span>
+        <span id="class_0"></span>
+      </div>
+
+      <div class="percentage">
+        <span>1:</span>
+        <span id="class_1"></span>
+      </div>
+
+      <div class="percentage">
+        <span>2:</span>
+        <span id="class_2"></span>
+      </div>
+
+      <div class="percentage">
+        <span>3:</span>
+        <span id="class_3"></span>
+      </div>
+
+      <div class="percentage">
+        <span>4:</span>
+        <span id="class_4"></span>
+      </div>
+
+      <div class="percentage">
+        <span>5:</span>
+        <span id="class_5"></span>
+      </div>
+
+      <div class="percentage">
+        <span>6:</span>
+        <span id="class_6"></span>
+      </div>
+
+      <div class="percentage">
+        <span>7:</span>
+        <span id="class_7"></span>
+      </div>
+
+      <div class="percentage">
+        <span>8:</span>
+        <span id="class_8"></span>
+      </div>
+
+      <div class="percentage">
+        <span>9:</span>
+        <span id="class_9"></span>
+      </div>
+    </div>
+
   </body>
 </html>

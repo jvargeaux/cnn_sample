@@ -60,7 +60,6 @@ num_steps = len(train_loader)
 for epoch in range(num_epochs):
   for i, (images, labels) in enumerate(train_loader):
     # origin shape: [60, 1, 28, 28]
-
     images = images.to(device)
     labels = labels.to(device)
 
