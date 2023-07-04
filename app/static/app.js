@@ -10,17 +10,7 @@ const onSelectFile = async (event) => {
   const file = event.target.files[0]
   console.log(file)
 
-  let formData = new FormData()
-  formData.append('file', file)
-
-  const response = await fetch('http://127.0.0.1:5000/api/digit', {
-    method: 'POST',
-    body: formData
-  })
-  const responseData = await response.json()
-  console.log('response', responseData)
-
-  updateResults(responseData)
+  fetchResults(file)
 }
 
 
@@ -81,6 +71,7 @@ const fetchResults = async (file) => {
 
   const response = await fetch('http://127.0.0.1:5000/api/digit', {
     method: 'POST',
+    mode: 'cors',
     body: formData
   })
   const responseData = await response.json()

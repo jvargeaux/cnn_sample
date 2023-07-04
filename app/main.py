@@ -31,12 +31,14 @@ def getDigit():
     json = jsonify({
       'error': 'No file provided.'
     })
+    json.status_code = 400
     json.headers.add('Access-Control-Allow-Origin', '*')
     return json
   if not is_allowed_filetype(file.filename):
     json = jsonify({
       'error': 'Filetype not supported.'
     })
+    json.status_code = 400
     json.headers.add('Access-Control-Allow-Origin', '*')
     return json
   
@@ -49,6 +51,7 @@ def getDigit():
       'prediction': prediction.item(),
       'percentages': percentages
     })
+    json.status_code = 200
     json.headers.add('Access-Control-Allow-Origin', '*')
     return json
   except Exception as e:
@@ -56,5 +59,6 @@ def getDigit():
     json = jsonify({
       'error': 'Problem reading file.'
     })
+    json.status_code = 500
     json.headers.add('Access-Control-Allow-Origin', '*')
     return json
