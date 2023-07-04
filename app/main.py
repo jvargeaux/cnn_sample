@@ -28,25 +28,33 @@ def getDigit():
 
   # If empty or not png, return error
   if file is None or file.filename == '':
-    return jsonify({
+    json = jsonify({
       'error': 'No file provided.'
     })
+    json.headers.add('Access-Control-Allow-Origin', '*')
+    return json
   if not is_allowed_filetype(file.filename):
-    return jsonify({
+    json = jsonify({
       'error': 'Filetype not supported.'
     })
+    json.headers.add('Access-Control-Allow-Origin', '*')
+    return json
   
   # Transform image bytes to tensor, and pass to model
   try:
     img_bytes = file.read()
     tensor = transform_image(img_bytes)
     prediction, percentages = get_prediction(tensor)
-    return jsonify({
+    json = jsonify({
       'prediction': prediction.item(),
       'percentages': percentages
     })
+    json.headers.add('Access-Control-Allow-Origin', '*')
+    return json
   except Exception as e:
     print(e)
-    return jsonify({
+    json = jsonify({
       'error': 'Problem reading file.'
     })
+    json.headers.add('Access-Control-Allow-Origin', '*')
+    return json
