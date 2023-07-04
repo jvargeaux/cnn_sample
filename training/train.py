@@ -14,15 +14,15 @@ print(f'device: {device}')
 
 
 # Set hyper parameters
-num_epochs = 2
+num_epochs = 4
 batch_size = 60 # split data into batches for training
 
 
 # PREPARE DATA
 
 # Download MNIST (digits) dataset
-train_data = torchvision.datasets.MNIST(root='./data', train=True, download=True, transform=transforms.ToTensor())
-test_data = torchvision.datasets.MNIST(root='./data', train=False, download=True, transform=transforms.ToTensor())
+train_data = torchvision.datasets.MNIST(root='./training/data', train=True, download=True, transform=transforms.ToTensor())
+test_data = torchvision.datasets.MNIST(root='./training/data', train=False, download=True, transform=transforms.ToTensor())
 
 # Load data into batches for training
 train_loader = DataLoader(dataset=train_data, batch_size=batch_size, shuffle=True)
@@ -97,3 +97,10 @@ with torch.no_grad(): # Don't use gradients!
 
   accuracy = 100.0 * num_correct / num_samples
   print(f'Accuracy of the network: {accuracy}%')
+
+
+
+# SAVE MODEL
+
+PATH = 'model.pth'
+torch.save(model.state_dict(), PATH)
