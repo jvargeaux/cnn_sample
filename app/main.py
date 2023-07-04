@@ -6,8 +6,7 @@ from predict import transform_image, get_prediction
 
 load_dotenv()
 app = Flask(__name__, static_url_path='/app/static')
-CORS(app, resources={r"/*": {"origins": "*"}})
-app.config['CORS_HEADERS'] = 'Content-Type'
+CORS(app)
 
 
 ALLOWED_FILETYPES = {'png'}
@@ -51,8 +50,6 @@ def getDigit():
       'prediction': prediction.item(),
       'percentages': percentages
     })
-    json.status_code = 200
-    json.headers.add('Access-Control-Allow-Origin', '*')
     return json
   except Exception as e:
     print(e)
