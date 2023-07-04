@@ -6,7 +6,7 @@ from predict import transform_image, get_prediction
 
 load_dotenv()
 app = Flask(__name__, static_url_path='/app/static')
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
@@ -21,6 +21,7 @@ def home():
 
 
 @app.route('/api/digit', methods=['POST'])
+@cross_origin
 def getDigit():
   # Get image file
   file = request.files.get('file')
