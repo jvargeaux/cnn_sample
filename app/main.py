@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS, cross_origin
 from dotenv import load_dotenv
-from predict import transform_image, get_prediction
+from predict import DigitClassifierCNNEvaluator
 
 
 load_dotenv()
@@ -9,8 +9,8 @@ app = Flask(__name__, static_url_path='/app/static')
 CORS(app)
 
 
-ALLOWED_FILETYPES = {'png'}
 def is_allowed_filetype(filename):
+  ALLOWED_FILETYPES = {'png'}
   return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_FILETYPES
 
 
@@ -38,8 +38,9 @@ def getDigit():
   # Transform image bytes to tensor, and pass to model
   try:
     img_bytes = file.read()
-    tensor = transform_image(img_bytes)
-    prediction, percentages = get_prediction(tensor)
+    evaluator = DigitClassifierCNNEvaluator()
+    tensor = evaluator.transform_image(img_bytes)
+    prediction, percentages = evaluator.predict(tensor)
     return jsonify({
       'prediction': prediction.item(),
       'percentages': percentages
@@ -50,3 +51,7 @@ def getDigit():
     return jsonify({
       'error': 'Problem reading file.'
     })
+  
+
+if __name__ == '__main__':
+  app.run(host='127.0.0.1', port=5000)

@@ -1,6 +1,6 @@
 
-// const url = 'http://127.0.0.1:5000'
-const url = 'http://167.172.139.55/cnn/'
+const URL = 'http://127.0.0.1:5000'
+// const url = 'http://167.172.139.55/cnn/'
 
 
 // === FILE ===
@@ -21,9 +21,9 @@ const onSelectFile = async (event) => {
 
 // === CANVAS ===
 
-var context = null
-var isDragging = false
-var stroke = 4
+let context = null
+let isDragging = false
+const STROKE = 4
 
 const canvasMouseDown = (event) => {
   if (!context) {
@@ -39,7 +39,7 @@ const onDrag = (event) => {
   if (!context || !isDragging) return
   const x = event.offsetX;
   const y = event.offsetY;
-  context.fillRect(x - stroke, y - stroke, stroke * 2, stroke * 2)
+  context.fillRect(x - STROKE, y - STROKE, STROKE * 2, STROKE * 2)
 }
 
 const onTouchDrag = (event) => {
@@ -52,7 +52,7 @@ const onTouchDrag = (event) => {
   const x = Math.max(0, touch.pageX - rect.left);
   const y = Math.max(0, touch.pageY - rect.top - window.scrollY);
   
-  context.fillRect(x - stroke, y - stroke, stroke * 2, stroke * 2)
+  context.fillRect(x - STROKE, y - STROKE, STROKE * 2, STROKE * 2)
 }
 
 const canvasMouseUp = (event) => {
@@ -86,7 +86,7 @@ const fetchResults = async (file) => {
   let formData = new FormData()
   formData.append('file', file)
 
-  const response = await fetch(url + '/api/digit', {
+  const response = await fetch(URL + '/api/digit', {
     method: 'POST',
     mode: 'cors',
     body: formData

@@ -3,7 +3,163 @@
 
 This is a Hello World style sample project I made for learning Convolutional Neural Networks (CNNs) in PyTorch. The project is a Flask app that takes in a .png image and produces a numerical digit [0-9] from a model trained in PyTorch on the MNIST handwritten digit dataset.
 
-Project URL: http://167.172.139.55/cnn/
+Project Demo URL: http://167.172.139.55/cnn/
+
+
+# Table of Contents
+
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Usage](#usage)
+  - [Training](#training)
+  - [API](#api)
+- [Project Architecture](#project-architecture)
+  - [Network Parameters](#network-parameters)
+  - [Layer Architecture](#layer-architecture)
+
+
+# Getting Started
+
+## Prerequisites
+
+To run the application locally, you will need the following prerequisites, found in [requirements.txt](./requirements.txt).
+
+- Python 3.10 or later
+- PyTorch
+- Torchvision
+- Pillow
+- Matplotlib
+- Flask
+- python-dotenv
+
+It is recommended to use a package manager such as conda or pip and create a virtual environment with the specific versions of each dependency.
+
+- conda
+
+> Go to [Anaconda's website](https://www.anaconda.com/download) and download the version for your OS
+
+or
+
+- pip and virtualenv
+
+> pip is installed automatically with Python if downloaded from the [Python website](https://www.python.org/)
+
+Linux / MacOS
+
+`python3 -m pip install --user virtualenv`
+
+Windows
+
+`py -m pip install --user virtualenv`
+
+
+## Installation
+
+With the above installed locally on your machine, follow the process below.
+
+1. Clone the repo
+
+`git clone https://github.com/jvargeaux/cnn_sample.git`
+
+2. cd into the project folder
+
+`cd mydir/cnn_sample/`
+
+3. Create a virtual environment with the dependencies listed in requirements.txt, and activate the virtual environment
+
+conda
+
+`conda create -n cnn_sample_env --file requirements.txt`
+`conda activate cnn_sample_env`
+
+pip
+
+Linux / MacOS
+
+`python3 -m venv cnn_sample_env`
+`source cnn_sample_env/bin/activate`
+`python3 -m pip install -r requirements.txt`
+
+Windows
+
+`py -m venv cnn_sample_env`
+`.\env\Scripts\activate`
+`py -m pip install -r requirements.txt`
+
+4. Set the flask environment variables using one of the following methods
+
+- Create a .env file in the project root directory and add
+`FLASK_APP=app/main.py`
+`FLASK_DEBUG=True`
+
+- Set the environment variables from the command line
+
+Linux / MacOS
+
+`export FLASK_APP=app/main.py`
+`export FLASK_DEBUG=True`
+
+Windows
+
+`set FLASK_APP=app/main.py`
+`set FLASK_DEBUG=True`
+
+5. Run the flask app, which will open the app on host 127.0.0.1, port 5000
+
+`flask run`
+
+
+# Usage
+
+## Training
+
+To train the model, run the following command from the project root directory.
+
+Linux / MacOS
+
+`python training/train.py`
+
+Windows
+
+`py training/train.py`
+
+### Examples
+
+To show examples of the dataset in the terminal, simply uncomment the second line in the main() function, found on line 103.
+
+```python
+# trainer.display_example_data()
+```
+
+### Save model
+
+To save the model state to a .pth file, uncommet the line in the main() function, found on line 106.
+
+```python
+# trainer.save_model()
+```
+
+### Modify hyper parameters
+
+To modify the hyper parameters, navigate to [training/train.py](./training/train.py) and change the number of epochs and batch size in the __init__() function.
+
+```python
+# Set hyper parameters
+self.num_epochs = 4
+self.batch_size = 60 # split data into batches for training
+```
+
+The loss criterion, learning rate, and optimizer can be found in the train() function.
+
+```python
+# Define loss criterion
+criterion = nn.CrossEntropyLoss() # cross-entropy loss for multi-class classification problem
+
+# Define learning rate & optimizer
+learning_rate = 0.01
+optimizer = torch.optim.Adam(self.model.parameters(), lr=learning_rate) # extension of Stochastic Gradient Descent (SGD)
+```
 
 
 ## API
@@ -21,6 +177,8 @@ The user can either upload a .png file or draw on the HTML5 canvas, which is con
 
 The model will respond with a 10-element array of floating point numbers containing the probabilities of each digit.
 
+
+# Project Architecture
 
 ## Network Parameters
 

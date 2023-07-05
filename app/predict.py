@@ -12,35 +12,39 @@ from PIL import Image
 from training.model import DigitClassifierCNN
 
 
+
 # Load the model state into a new instance
-model = DigitClassifierCNN()
-PATH = parent_dir + '/model.pth'
-print(PATH)
-model.load_state_dict(torch.load(PATH))
-model.eval()
+class DigitClassifierCNNEvaluator():
+  def __init__(self):
+    self.model = DigitClassifierCNN()
+
+    # Load model state from .pth file
+    PATH = parent_dir + '/model.pth'
+    self.model.load_state_dict(torch.load(PATH))
+    self.model.eval()
 
 
-# Refit image data to be read by the model
-def transform_image(image_bytes):
-  transform = transforms.Compose([
-    transforms.Grayscale(num_output_channels=1),
-    transforms.Resize((28, 28)),
-    transforms.ToTensor(),
-    transforms.Normalize(mean=(0.1307,), std=(0.3081,)), # from MNIST
-  ])
-  image = Image.open(io.BytesIO(image_bytes))
+  # Refit image data to be read by the model
+  def transform_image(self, image_bytes):
+    transform = transforms.Compose([
+      transforms.Grayscale(num_output_channels=1),
+      transforms.Resize((28, 28)),
+      transforms.ToTensor(),
+      transforms.Normalize(mean=(0.1307,), std=(0.3081,)), # from MNIST
+    ])
+    image = Image.open(io.BytesIO(image_bytes))
 
-  return transform(image).unsqueeze(0)
+    return transform(image).unsqueeze(0)
 
 
-# Use our trained model on the image data we receive
-def get_prediction(image_tensor):
-  outputs = model(image_tensor)
-  
-  # Use Softmax to get percentages for all classes
-  all_outputs = torch.softmax(outputs.data, dim=1)
-  all_outputs = all_outputs.numpy()[0]
-  percentages = all_outputs.tolist()
+  # Use our trained model on the image data we receive
+  def predict(self, image_tensor):
+    outputs = self.model(image_tensor)
+    
+    # Use Softmax to get percentages for all classes
+    all_outputs = torch.softmax(outputs.data, dim=1)
+    all_outputs = all_outputs.numpy()[0]
+    percentages = all_outputs.tolist()
 
-  _, predicted = torch.max(outputs.data, 1)
-  return predicted, percentages
+    _, predicted = torch.max(outputs.data, 1)
+    return predicted, percentages
