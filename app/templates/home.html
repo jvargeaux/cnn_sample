@@ -2,6 +2,7 @@
 
 <html>
   <head>
+    <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
     <script src="{{ url_for('static', filename='app.js') }}"></script>
   </head>
@@ -37,6 +38,9 @@
       onmousedown="canvasMouseDown(event)"
       onmousemove="onDrag(event)"
       onmouseup="canvasMouseUp(event)"
+      ontouchstart="canvasMouseDown(event)"
+      ontouchmove="onTouchDrag(event)"
+      ontouchend="canvasMouseUp(event)"
     ></canvas>
 
     <button class="clear-button" onClick="clearCanvas()">Clear</button>

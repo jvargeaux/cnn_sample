@@ -42,6 +42,19 @@ const onDrag = (event) => {
   context.fillRect(x - stroke, y - stroke, stroke * 2, stroke * 2)
 }
 
+const onTouchDrag = (event) => {
+  event.preventDefault()
+  const touch = event.touches?.[0] || event.targetTouches?.[0]
+  
+  if (!context || !isDragging || !touch) return
+  
+  const rect = document.getElementById('canvas').getBoundingClientRect()
+  const x = Math.max(0, touch.pageX - rect.left);
+  const y = Math.max(0, touch.pageY - rect.top - window.scrollY);
+  
+  context.fillRect(x - stroke, y - stroke, stroke * 2, stroke * 2)
+}
+
 const canvasMouseUp = (event) => {
   isDragging = false
 }
