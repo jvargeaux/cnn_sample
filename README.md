@@ -58,22 +58,28 @@ Windows
 
 With the above installed locally on your machine, follow the process below.
 
+---
+
 1. Clone the repo
 
 `git clone https://github.com/jvargeaux/cnn_sample.git`
+
+---
 
 2. cd into the project folder
 
 `cd mydir/cnn_sample/`
 
+---
+
 3. Create a virtual environment with the dependencies listed in requirements.txt, and activate the virtual environment
 
-conda
+>conda
 
 `conda create -n cnn_sample_env --file requirements.txt`
 `conda activate cnn_sample_env`
 
-pip
+>pip
 
 Linux / MacOS
 
@@ -87,13 +93,16 @@ Windows
 `.\env\Scripts\activate`
 `py -m pip install -r requirements.txt`
 
+---
+
 4. Set the flask environment variables using one of the following methods
 
-- Create a .env file in the project root directory and add
+>Create a .env file in the project root directory with the following variables
+
 `FLASK_APP=app/main.py`
 `FLASK_DEBUG=True`
 
-- Set the environment variables from the command line
+>Set the environment variables from the command line
 
 Linux / MacOS
 
@@ -104,6 +113,8 @@ Windows
 
 `set FLASK_APP=app/main.py`
 `set FLASK_DEBUG=True`
+
+---
 
 5. Run the flask app, which will open the app on host 127.0.0.1, port 5000
 
@@ -124,6 +135,16 @@ Windows
 
 `py training/train.py`
 
+---
+
+### Data
+
+The MNIST dataset is a famous set of 60,000 samples of hand-drawn black and white images. We slice these up into batches and train them in steps within each epoch.
+
+![MNIST dataset](https://datasets.activeloop.ai/wp-content/uploads/2019/12/MNIST-handwritten-digits-dataset-visualized-by-Activeloop.webp)
+
+---
+
 ### Examples
 
 To show examples of the dataset in the terminal, simply uncomment the second line in the main() function, found on line 103.
@@ -132,6 +153,8 @@ To show examples of the dataset in the terminal, simply uncomment the second lin
 # trainer.display_example_data()
 ```
 
+---
+
 ### Save model
 
 To save the model state to a .pth file, uncommet the line in the main() function, found on line 106.
@@ -139,6 +162,8 @@ To save the model state to a .pth file, uncommet the line in the main() function
 ```python
 # trainer.save_model()
 ```
+
+---
 
 ### Modify hyper parameters
 
