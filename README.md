@@ -47,11 +47,15 @@ or
 
 Linux / MacOS
 
-`python3 -m pip install --user virtualenv`
+```
+python3 -m pip install --user virtualenv
+```
 
 Windows
 
-`py -m pip install --user virtualenv`
+```
+py -m pip install --user virtualenv
+```
 
 
 ## Installation
@@ -62,13 +66,17 @@ With the above installed locally on your machine, follow the process below.
 
 1. Clone the repo
 
-`git clone https://github.com/jvargeaux/cnn_sample.git`
+```
+git clone https://github.com/jvargeaux/cnn_sample.git
+```
 
 ---
 
 2. cd into the project folder
 
-`cd mydir/cnn_sample/`
+```
+cd mydir/cnn_sample/
+```
 
 ---
 
@@ -76,22 +84,28 @@ With the above installed locally on your machine, follow the process below.
 
 >conda
 
-`conda create -n cnn_sample_env --file requirements.txt`
-`conda activate cnn_sample_env`
+```
+conda create -n cnn_sample_env --file requirements.txt
+conda activate cnn_sample_env
+```
 
 >pip
 
 Linux / MacOS
 
-`python3 -m venv cnn_sample_env`
-`source cnn_sample_env/bin/activate`
-`python3 -m pip install -r requirements.txt`
+```
+python3 -m venv cnn_sample_env
+source cnn_sample_env/bin/activate
+python3 -m pip install -r requirements.txt
+```
 
 Windows
 
-`py -m venv cnn_sample_env`
-`.\env\Scripts\activate`
-`py -m pip install -r requirements.txt`
+```
+py -m venv cnn_sample_env
+.\env\Scripts\activate
+py -m pip install -r requirements.txt
+```
 
 ---
 
@@ -99,26 +113,34 @@ Windows
 
 >Create a .env file in the project root directory with the following variables
 
-`FLASK_APP=app/main.py`
-`FLASK_DEBUG=True`
+```
+FLASK_APP=app/main.py
+FLASK_DEBUG=True
+```
 
 >Set the environment variables from the command line
 
 Linux / MacOS
 
-`export FLASK_APP=app/main.py`
-`export FLASK_DEBUG=True`
+```
+export FLASK_APP=app/main.py
+export FLASK_DEBUG=True
+```
 
 Windows
 
-`set FLASK_APP=app/main.py`
-`set FLASK_DEBUG=True`
+```
+set FLASK_APP=app/main.py
+set FLASK_DEBUG=True
+```
 
 ---
 
 5. Run the flask app, which will open the app on host 127.0.0.1, port 5000
 
-`flask run`
+```
+flask run
+```
 
 
 # Usage
@@ -129,11 +151,15 @@ To train the model, run the following command from the project root directory.
 
 Linux / MacOS
 
-`python training/train.py`
+```
+python training/train.py
+```
 
 Windows
 
-`py training/train.py`
+```
+py training/train.py
+```
 
 ---
 
